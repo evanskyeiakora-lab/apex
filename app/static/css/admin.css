@@ -1,0 +1,55 @@
+body{
+    margin:0;
+    background:#f4f6f9;
+    font-family:'Poppins',sans-serif;
+}
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:260px;
+    background:#003B73;
+    color:#fff;
+    min-height:100vh;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:0;
+}
+
+.sidebar li{
+    margin:8px 0;
+}
+
+.sidebar a{
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    padding:15px 20px;
+}
+
+.sidebar a:hover{
+    background:#002952;
+}
+
+.main{
+    flex:1;
+}
+
+.topbar{
+    background:#fff;
+    padding:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:16px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
