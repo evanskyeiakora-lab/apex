@@ -1,22 +1,18 @@
-from flask import Blueprint, render_template
+from flask import render_template
 from flask_login import login_required
 
-from app.models import News, Gallery, HeroSlide
-
-admin_bp = Blueprint("admin", __name__)
+from . import admin_bp
+from app.models import News, Gallery, Member, ContactMessage
 
 
 @admin_bp.route("/")
-
+@login_required
 def dashboard():
-
-    stats = {
-        "news": News.query.count(),
-        "gallery": Gallery.query.count(),
-        "slides": HeroSlide.query.count(),
-    }
 
     return render_template(
         "admin/dashboard.html",
-        stats=stats
+        news_count=News.query.count(),
+        gallery_count=Gallery.query.count(),
+        member_count=Member.query.count(),
+        message_count=ContactMessage.query.count()
     )

@@ -1,22 +1,28 @@
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
-
+# Project root
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+# Instance directory
+INSTANCE_DIR = os.path.join(BASE_DIR, "instance")
+
+# Create the instance directory if it doesn't exist
+os.makedirs(INSTANCE_DIR, exist_ok=True)
+
+print("DATABASE =", "sqlite:///" + os.path.join(INSTANCE_DIR, "acg.db"))
 
 
 class Config:
-    SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
+    SECRET_KEY = os.environ.get("SECRET_KEY", "apex-development-secret-key")
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BASE_DIR, "acg.db")
+    SQLALCHEMY_DATABASE_URI = (
+        "sqlite:///" + os.path.join(INSTANCE_DIR, "acg.db")
+    )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-UPLOAD_FOLDER = "app/static/uploads"
-NEWS_UPLOAD_FOLDER = "app/static/uploads/news"
-GALLERY_UPLOAD_FOLDER = "app/static/uploads/gallery"
-SLIDER_UPLOAD_FOLDER = "app/static/uploads/slides"
+    MAX_CONTENT_LENGTH = 5 * 1024 * 1024
 
-MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5 MB
-ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}
+    UPLOAD_FOLDER = os.path.join(BASE_DIR, "app", "static", "uploads")
+
+    ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}

@@ -18,13 +18,15 @@ def create_app():
     from . import models
 
     # Register blueprints
-    from .main.routes import main_bp
-    from .auth.routes import auth_bp
-    from .admin.routes import admin_bp
+    from .main import main_bp
+    from .auth import auth_bp
+    from .admin import admin_bp
+    from .news import news_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(admin_bp, url_prefix="/admin")
+    app.register_blueprint(news_bp)
 
     @app.context_processor
     def inject_now():
@@ -32,7 +34,6 @@ def create_app():
             "current_year": datetime.now().year
         }
 
-    with app.app_context():
-        db.create_all()
+   
 
     return app
